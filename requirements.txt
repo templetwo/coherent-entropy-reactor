@@ -1,0 +1,21 @@
+# Coherent Entropy Reactor - Dependencies
+
+# Core
+torch>=2.0.0
+numpy>=1.24.0
+
+# Transformers (for benchmarking against LLMs)
+transformers>=4.35.0
+
+# Visualization
+matplotlib>=3.7.0
+
+# Utilities
+tqdm>=4.65.0
+pyyaml>=6.0
+
+# Optional: MLX for Apple Silicon
+# mlx>=0.4.0
+
+# Optional: CUDA extensions
+# triton>=2.1.0
