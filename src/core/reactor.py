@@ -114,6 +114,7 @@ class CoherentEntropyReactor(nn.Module):
         num_refinement_steps: Recursive passes per layer
         kuramoto_k: Kuramoto coupling strength
         target_entropy: Target entropy in nats (2-4)
+        drift_strength: Noise scale for cage escape (0.1 default)
     """
 
     def __init__(
@@ -125,6 +126,7 @@ class CoherentEntropyReactor(nn.Module):
         num_refinement_steps: int = 3,
         kuramoto_k: float = 2.0,
         target_entropy: float = 3.0,
+        drift_strength: float = 0.1,
         dropout: float = 0.1
     ):
         super().__init__()
@@ -134,6 +136,7 @@ class CoherentEntropyReactor(nn.Module):
         self.num_refinement_steps = num_refinement_steps
         self.kuramoto_k = kuramoto_k
         self.target_entropy = target_entropy
+        self.drift_strength = drift_strength
 
         # Entropy encoder
         self.encoder = EntropyEncoder(input_dim, hidden_dim)
@@ -166,19 +169,51 @@ class CoherentEntropyReactor(nn.Module):
 
         M_semantic = (1/N) * Tr(I(θ))
 
-        Approximated by variance of activations (simpler, more stable).
+        Fisher Information I = E[∇log p · ∇log p^T]
+        For softmax distribution, this measures curvature in probability space.
         """
-        # Compute variance-based mass (proxy for Fisher trace)
-        # Higher variance = more distributed = more "massive"
-        variance = z.var(dim=-1).mean()
+        # Ensure z requires grad for Fisher computation
+        z_fisher = z.detach().requires_grad_(True)
 
-        # Also factor in the magnitude (energy)
-        magnitude = (z ** 2).mean()
+        # Compute log probabilities
+        log_probs = F.log_softmax(z_fisher, dim=-1)
 
-        # Combined mass metric
-        mass = variance * magnitude
+        # Fisher = E[||∇log p||²] - trace of Fisher Information matrix
+        # Sum over all dimensions to get scalar for gradient
+        log_prob_sum = log_probs.sum()
 
-        return mass
+        # Compute gradient
+        grad = torch.autograd.grad(
+            log_prob_sum,
+            z_fisher,
+            create_graph=False,
+            retain_graph=False
+        )[0]
+
+        # Fisher trace approximation: mean of squared gradients
+        # This is Tr(I(θ)) / N
+        fisher_trace = (grad ** 2).mean()
+
+        return fisher_trace
+
+    def apply_drift(self, z: torch.Tensor) -> torch.Tensor:
+        """
+        Escape entropy cage via latent perturbation.
+
+        When entropy falls below target, inject noise proportional
+        to the deficit. This is the corrective mechanism alongside
+        Kuramoto's oscillatory modulation.
+        """
+        with torch.no_grad():
+            current_entropy = self.compute_entropy(z)
+
+            if current_entropy < self.target_entropy:
+                # Deficit-proportional noise injection
+                deficit = self.target_entropy - current_entropy
+                noise = torch.randn_like(z) * deficit * self.drift_strength
+                z = z + noise
+
+        return z
 
     def kuramoto_step(self, z: torch.Tensor) -> torch.Tensor:
         """
@@ -223,8 +258,11 @@ class CoherentEntropyReactor(nn.Module):
                 # Refine state
                 z = layer(z)
 
-                # Apply Kuramoto modulation
+                # Apply Kuramoto modulation (oscillatory)
                 z = self.kuramoto_step(z)
+
+                # Apply drift if trapped in cage (corrective)
+                z = self.apply_drift(z)
 
                 # Track mass if requested
                 if return_mass:
@@ -285,7 +323,8 @@ if __name__ == "__main__":
         num_layers=2,
         num_refinement_steps=3,
         kuramoto_k=2.0,
-        target_entropy=3.0
+        target_entropy=3.0,
+        drift_strength=0.1
     )
 
     print(f"Parameters: {count_parameters(reactor):,}")
@@ -298,7 +337,13 @@ if __name__ == "__main__":
 
     output, mass = reactor.react(x)
 
+    # Compute output entropy
+    probs = F.softmax(output, dim=-1)
+    entropy = -torch.sum(probs * torch.log(probs + 1e-10), dim=-1).mean().item()
+
     print(f"Input shape: {x.shape}")
     print(f"Output shape: {output.shape}")
-    print(f"Semantic mass: {mass:.4f}")
-    print(f"Mass history: {reactor.get_mass_history()}")
+    print(f"Semantic mass (Fisher): {mass:.6f}")
+    print(f"Output entropy: {entropy:.2f} nats")
+    print(f"Phase state: {reactor.phase.item():.4f} rad")
+    print(f"Mass history length: {len(reactor.get_mass_history())}")
