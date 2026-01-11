@@ -1,0 +1,2766 @@
+{
+  "metadata": {
+    "target_entropy": 3.0,
+    "max_state_entropy": 5.545177,
+    "max_output_entropy": 4.85203,
+    "input_dim": 128,
+    "hidden_dim": 256,
+    "output_dim": 128,
+    "num_layers": 2,
+    "num_refinement_steps": 3,
+    "n_seeds": 10
+  },
+  "seed_results": [
+    {
+      "seed": 0,
+      "conditions": [
+        {
+          "name": "PEAKED",
+          "input_entropy": 0.063077,
+          "output_entropy": 4.323846,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.893294,
+              "mass": 0.989086,
+              "phase": -0.176916,
+              "sum_p": 1.0,
+              "max_prob": 0.030896,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.097888,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.506627,
+              "mass": 0.980774,
+              "phase": -0.376661,
+              "sum_p": 1.0,
+              "max_prob": 0.062883,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.774899,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 4.210117,
+              "mass": 0.970376,
+              "phase": -0.562061,
+              "sum_p": 1.0,
+              "max_prob": 0.103568,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.493555,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.379251,
+              "mass": 0.977202,
+              "phase": -0.754563,
+              "sum_p": 1.0,
+              "max_prob": 0.083702,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.643242,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.448937,
+              "mass": 0.980077,
+              "phase": -0.947615,
+              "sum_p": 1.0,
+              "max_prob": 0.064254,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.702836,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 4.375746,
+              "mass": 0.974271,
+              "phase": -1.127201,
+              "sum_p": 1.0,
+              "max_prob": 0.099836,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.669008,
+              "control": "BRAKE"
+            }
+          ]
+        },
+        {
+          "name": "UNIFORM",
+          "input_entropy": 4.85203,
+          "output_entropy": 4.351142,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.894259,
+              "mass": 0.989049,
+              "phase": -0.176967,
+              "sum_p": 1.0,
+              "max_prob": 0.034965,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.097044,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.450062,
+              "mass": 0.979291,
+              "phase": -0.376958,
+              "sum_p": 1.0,
+              "max_prob": 0.061408,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.725062,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 4.14025,
+              "mass": 0.970465,
+              "phase": -0.555397,
+              "sum_p": 1.0,
+              "max_prob": 0.081677,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.409635,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.2227,
+              "mass": 0.972513,
+              "phase": -0.734242,
+              "sum_p": 1.0,
+              "max_prob": 0.077324,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.503423,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.269067,
+              "mass": 0.972053,
+              "phase": -0.909617,
+              "sum_p": 1.0,
+              "max_prob": 0.089504,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.565111,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 4.312137,
+              "mass": 0.972341,
+              "phase": -1.082331,
+              "sum_p": 1.0,
+              "max_prob": 0.100619,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.61496,
+              "control": "BRAKE"
+            }
+          ]
+        },
+        {
+          "name": "RANDOM",
+          "input_entropy": 4.367953,
+          "output_entropy": 4.352007,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.886948,
+              "mass": 0.988835,
+              "phase": -0.177397,
+              "sum_p": 1.0,
+              "max_prob": 0.036895,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.093225,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.445088,
+              "mass": 0.978937,
+              "phase": -0.377379,
+              "sum_p": 1.0,
+              "max_prob": 0.065243,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.722685,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 4.144632,
+              "mass": 0.970449,
+              "phase": -0.556268,
+              "sum_p": 1.0,
+              "max_prob": 0.085136,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.41475,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.220798,
+              "mass": 0.972033,
+              "phase": -0.734804,
+              "sum_p": 1.0,
+              "max_prob": 0.083089,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.503845,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.261865,
+              "mass": 0.971313,
+              "phase": -0.909051,
+              "sum_p": 1.0,
+              "max_prob": 0.094256,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.561498,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 4.306965,
+              "mass": 0.971631,
+              "phase": -1.08075,
+              "sum_p": 1.0,
+              "max_prob": 0.103911,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.61365,
+              "control": "BRAKE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 1,
+      "conditions": [
+        {
+          "name": "PEAKED",
+          "input_entropy": 0.063077,
+          "output_entropy": 4.390816,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.86741,
+              "mass": 0.988233,
+              "phase": -0.178109,
+              "sum_p": 1.0,
+              "max_prob": 0.036358,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.088354,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.46744,
+              "mass": 0.978296,
+              "phase": -0.378065,
+              "sum_p": 1.0,
+              "max_prob": 0.067957,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.760955,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 4.06746,
+              "mass": 0.959396,
+              "phase": -0.548418,
+              "sum_p": 1.0,
+              "max_prob": 0.133832,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.393034,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 3.771478,
+              "mass": 0.912998,
+              "phase": -0.643227,
+              "sum_p": 1.0,
+              "max_prob": 0.265228,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.168663,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 3.306641,
+              "mass": 0.828223,
+              "phase": -0.581472,
+              "sum_p": 1.0,
+              "max_prob": 0.398357,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -0.598449,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 2.817159,
+              "mass": 0.724471,
+              "phase": -0.418671,
+              "sum_p": 1.0,
+              "max_prob": 0.513865,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": 0.181797,
+              "control": "ESCAPE"
+            }
+          ]
+        },
+        {
+          "name": "UNIFORM",
+          "input_entropy": 4.85203,
+          "output_entropy": 4.214718,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.885616,
+              "mass": 0.988296,
+              "phase": -0.176953,
+              "sum_p": 1.0,
+              "max_prob": 0.045585,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.098521,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.306089,
+              "mass": 0.96692,
+              "phase": -0.375266,
+              "sum_p": 1.0,
+              "max_prob": 0.131423,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.652631,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 3.730782,
+              "mass": 0.925927,
+              "phase": -0.488722,
+              "sum_p": 1.0,
+              "max_prob": 0.230667,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.066288,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 3.70305,
+              "mass": 0.927329,
+              "phase": -0.578996,
+              "sum_p": 1.0,
+              "max_prob": 0.195056,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.039497,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 3.633906,
+              "mass": 0.916096,
+              "phase": -0.635829,
+              "sum_p": 1.0,
+              "max_prob": 0.223317,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -0.972064,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 3.591249,
+              "mass": 0.905717,
+              "phase": -0.669408,
+              "sum_p": 1.0,
+              "max_prob": 0.257147,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -0.928705,
+              "control": "BRAKE"
+            }
+          ]
+        },
+        {
+          "name": "RANDOM",
+          "input_entropy": 4.375269,
+          "output_entropy": 4.213378,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.885579,
+              "mass": 0.988337,
+              "phase": -0.17698,
+              "sum_p": 1.0,
+              "max_prob": 0.043608,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.098225,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.311192,
+              "mass": 0.96757,
+              "phase": -0.375386,
+              "sum_p": 1.0,
+              "max_prob": 0.126198,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.654113,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 3.742452,
+              "mass": 0.928561,
+              "phase": -0.491278,
+              "sum_p": 1.0,
+              "max_prob": 0.220261,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.075434,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 3.704277,
+              "mass": 0.927667,
+              "phase": -0.581493,
+              "sum_p": 1.0,
+              "max_prob": 0.191622,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.039941,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 3.612338,
+              "mass": 0.911801,
+              "phase": -0.631774,
+              "sum_p": 1.0,
+              "max_prob": 0.237018,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -0.949361,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 3.541967,
+              "mass": 0.896365,
+              "phase": -0.65128,
+              "sum_p": 1.0,
+              "max_prob": 0.278861,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -0.872877,
+              "control": "BRAKE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 2,
+      "conditions": [
+        {
+          "name": "PEAKED",
+          "input_entropy": 0.063077,
+          "output_entropy": 4.330464,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.736281,
+              "mass": 0.984887,
+              "phase": -0.186499,
+              "sum_p": 1.0,
+              "max_prob": 0.050225,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.999707,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.178368,
+              "mass": 0.965134,
+              "phase": -0.378501,
+              "sum_p": 1.0,
+              "max_prob": 0.101639,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.525683,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 3.776814,
+              "mass": 0.945647,
+              "phase": -0.501175,
+              "sum_p": 1.0,
+              "max_prob": 0.13095,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.08104,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 3.839468,
+              "mass": 0.940998,
+              "phase": -0.620678,
+              "sum_p": 1.0,
+              "max_prob": 0.182706,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.17849,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 3.742243,
+              "mass": 0.920037,
+              "phase": -0.697679,
+              "sum_p": 1.0,
+              "max_prob": 0.24203,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.110336,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 3.720495,
+              "mass": 0.917441,
+              "phase": -0.755311,
+              "sum_p": 1.0,
+              "max_prob": 0.239513,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.093433,
+              "control": "BRAKE"
+            }
+          ]
+        },
+        {
+          "name": "UNIFORM",
+          "input_entropy": 4.85203,
+          "output_entropy": 4.417625,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.860378,
+              "mass": 0.988644,
+              "phase": -0.179404,
+              "sum_p": 1.0,
+              "max_prob": 0.031522,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.073882,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.478905,
+              "mass": 0.980142,
+              "phase": -0.379362,
+              "sum_p": 1.0,
+              "max_prob": 0.061461,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.751314,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 4.214043,
+              "mass": 0.971821,
+              "phase": -0.564966,
+              "sum_p": 1.0,
+              "max_prob": 0.079513,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.492769,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.191452,
+              "mass": 0.967397,
+              "phase": -0.73897,
+              "sum_p": 1.0,
+              "max_prob": 0.108,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.502944,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.163036,
+              "mass": 0.963553,
+              "phase": -0.896791,
+              "sum_p": 1.0,
+              "max_prob": 0.128142,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.498456,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 4.187646,
+              "mass": 0.964695,
+              "phase": -1.047874,
+              "sum_p": 1.0,
+              "max_prob": 0.12221,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.529112,
+              "control": "BRAKE"
+            }
+          ]
+        },
+        {
+          "name": "RANDOM",
+          "input_entropy": 4.365794,
+          "output_entropy": 4.418463,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.85204,
+              "mass": 0.988364,
+              "phase": -0.179847,
+              "sum_p": 1.0,
+              "max_prob": 0.034489,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.069825,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.4677,
+              "mass": 0.979425,
+              "phase": -0.379835,
+              "sum_p": 1.0,
+              "max_prob": 0.067714,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.745665,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 4.205227,
+              "mass": 0.970977,
+              "phase": -0.56467,
+              "sum_p": 1.0,
+              "max_prob": 0.085947,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.488354,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.191716,
+              "mass": 0.967301,
+              "phase": -0.738701,
+              "sum_p": 1.0,
+              "max_prob": 0.10504,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.505233,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.171038,
+              "mass": 0.964368,
+              "phase": -0.898004,
+              "sum_p": 1.0,
+              "max_prob": 0.120911,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.504931,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 4.207675,
+              "mass": 0.96633,
+              "phase": -1.053146,
+              "sum_p": 1.0,
+              "max_prob": 0.114125,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.544112,
+              "control": "BRAKE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 3,
+      "conditions": [
+        {
+          "name": "PEAKED",
+          "input_entropy": 0.063077,
+          "output_entropy": 4.332404,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.777425,
+              "mass": 0.985492,
+              "phase": -0.183675,
+              "sum_p": 1.0,
+              "max_prob": 0.054529,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.032858,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.389012,
+              "mass": 0.973045,
+              "phase": -0.38339,
+              "sum_p": 1.0,
+              "max_prob": 0.099435,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.711799,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 4.093323,
+              "mass": 0.955109,
+              "phase": -0.556817,
+              "sum_p": 1.0,
+              "max_prob": 0.168388,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.436303,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.163538,
+              "mass": 0.963214,
+              "phase": -0.727416,
+              "sum_p": 1.0,
+              "max_prob": 0.134996,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.490732,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.200801,
+              "mass": 0.967151,
+              "phase": -0.892687,
+              "sum_p": 1.0,
+              "max_prob": 0.106062,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.523899,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 4.219888,
+              "mass": 0.967757,
+              "phase": -1.050727,
+              "sum_p": 1.0,
+              "max_prob": 0.09945,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.54896,
+              "control": "BRAKE"
+            }
+          ]
+        },
+        {
+          "name": "UNIFORM",
+          "input_entropy": 4.85203,
+          "output_entropy": 4.147247,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.937747,
+              "mass": 0.990149,
+              "phase": -0.174058,
+              "sum_p": 1.0,
+              "max_prob": 0.024408,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.123092,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.667827,
+              "mass": 0.986242,
+              "phase": -0.37005,
+              "sum_p": 1.0,
+              "max_prob": 0.035789,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.887534,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 4.444612,
+              "mass": 0.98197,
+              "phase": -0.568681,
+              "sum_p": 1.0,
+              "max_prob": 0.048881,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.6737,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.369528,
+              "mass": 0.978617,
+              "phase": -0.760549,
+              "sum_p": 1.0,
+              "max_prob": 0.062205,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.625363,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.28279,
+              "mass": 0.972706,
+              "phase": -0.93647,
+              "sum_p": 1.0,
+              "max_prob": 0.084248,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.581746,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 4.256411,
+              "mass": 0.968694,
+              "phase": -1.097776,
+              "sum_p": 1.0,
+              "max_prob": 0.102169,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.587987,
+              "control": "BRAKE"
+            }
+          ]
+        },
+        {
+          "name": "RANDOM",
+          "input_entropy": 4.354748,
+          "output_entropy": 4.15401,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.933614,
+              "mass": 0.990032,
+              "phase": -0.174292,
+              "sum_p": 1.0,
+              "max_prob": 0.025649,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.121168,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.663738,
+              "mass": 0.986075,
+              "phase": -0.370408,
+              "sum_p": 1.0,
+              "max_prob": 0.0371,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.885728,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 4.442293,
+              "mass": 0.981845,
+              "phase": -0.56898,
+              "sum_p": 1.0,
+              "max_prob": 0.048806,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.67283,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.367287,
+              "mass": 0.978408,
+              "phase": -0.76067,
+              "sum_p": 1.0,
+              "max_prob": 0.063732,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.624835,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.281229,
+              "mass": 0.972286,
+              "phase": -0.936262,
+              "sum_p": 1.0,
+              "max_prob": 0.087018,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.582565,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 4.248612,
+              "mass": 0.967686,
+              "phase": -1.095868,
+              "sum_p": 1.0,
+              "max_prob": 0.105453,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.584399,
+              "control": "BRAKE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 4,
+      "conditions": [
+        {
+          "name": "PEAKED",
+          "input_entropy": 0.063077,
+          "output_entropy": 4.244693,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.871106,
+              "mass": 0.988256,
+              "phase": -0.177758,
+              "sum_p": 1.0,
+              "max_prob": 0.034777,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.091917,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.461302,
+              "mass": 0.978296,
+              "phase": -0.377738,
+              "sum_p": 1.0,
+              "max_prob": 0.067946,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.754874,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 4.02983,
+              "mass": 0.962018,
+              "phase": -0.54301,
+              "sum_p": 1.0,
+              "max_prob": 0.10078,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.338871,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.183261,
+              "mass": 0.96777,
+              "phase": -0.717304,
+              "sum_p": 1.0,
+              "max_prob": 0.094801,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.498108,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.325354,
+              "mass": 0.974258,
+              "phase": -0.899881,
+              "sum_p": 1.0,
+              "max_prob": 0.076333,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.621244,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 4.430364,
+              "mass": 0.978799,
+              "phase": -1.087931,
+              "sum_p": 1.0,
+              "max_prob": 0.063553,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.704269,
+              "control": "BRAKE"
+            }
+          ]
+        },
+        {
+          "name": "UNIFORM",
+          "input_entropy": 4.85203,
+          "output_entropy": 4.04998,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.803046,
+              "mass": 0.98694,
+              "phase": -0.182955,
+              "sum_p": 1.0,
+              "max_prob": 0.045785,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.03794,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.245173,
+              "mass": 0.969151,
+              "phase": -0.37831,
+              "sum_p": 1.0,
+              "max_prob": 0.101011,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.571396,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 3.808193,
+              "mass": 0.948394,
+              "phase": -0.507054,
+              "sum_p": 1.0,
+              "max_prob": 0.137328,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.103014,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.054844,
+              "mass": 0.96411,
+              "phase": -0.666363,
+              "sum_p": 1.0,
+              "max_prob": 0.094189,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.35293,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.155553,
+              "mass": 0.969335,
+              "phase": -0.830558,
+              "sum_p": 1.0,
+              "max_prob": 0.092494,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.443994,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 4.150275,
+              "mass": 0.969186,
+              "phase": -0.984006,
+              "sum_p": 1.0,
+              "max_prob": 0.085811,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.443516,
+              "control": "BRAKE"
+            }
+          ]
+        },
+        {
+          "name": "RANDOM",
+          "input_entropy": 4.369414,
+          "output_entropy": 4.061465,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.799309,
+              "mass": 0.986783,
+              "phase": -0.183145,
+              "sum_p": 1.0,
+              "max_prob": 0.045435,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.036025,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.22848,
+              "mass": 0.968079,
+              "phase": -0.377738,
+              "sum_p": 1.0,
+              "max_prob": 0.102513,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.55863,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 3.803893,
+              "mass": 0.947961,
+              "phase": -0.505733,
+              "sum_p": 1.0,
+              "max_prob": 0.136645,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.098885,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.046731,
+              "mass": 0.963276,
+              "phase": -0.663834,
+              "sum_p": 1.0,
+              "max_prob": 0.099004,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.34735,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.148345,
+              "mass": 0.968668,
+              "phase": -0.826944,
+              "sum_p": 1.0,
+              "max_prob": 0.093837,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.439881,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 4.14223,
+              "mass": 0.968186,
+              "phase": -0.978659,
+              "sum_p": 1.0,
+              "max_prob": 0.09092,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.44063,
+              "control": "BRAKE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 5,
+      "conditions": [
+        {
+          "name": "PEAKED",
+          "input_entropy": 0.063077,
+          "output_entropy": 4.115445,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.738295,
+              "mass": 0.984804,
+              "phase": -0.186203,
+              "sum_p": 1.0,
+              "max_prob": 0.053125,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.003998,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.198893,
+              "mass": 0.964032,
+              "phase": -0.379888,
+              "sum_p": 1.0,
+              "max_prob": 0.115113,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.561194,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 3.746223,
+              "mass": 0.933017,
+              "phase": -0.496244,
+              "sum_p": 1.0,
+              "max_prob": 0.188629,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.087655,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 3.659344,
+              "mass": 0.908649,
+              "phase": -0.573281,
+              "sum_p": 1.0,
+              "max_prob": 0.257237,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.034271,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 3.572906,
+              "mass": 0.887678,
+              "phase": -0.611271,
+              "sum_p": 1.0,
+              "max_prob": 0.305576,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -0.940955,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 3.465954,
+              "mass": 0.879185,
+              "phase": -0.612318,
+              "sum_p": 1.0,
+              "max_prob": 0.320707,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -0.769783,
+              "control": "BRAKE"
+            }
+          ]
+        },
+        {
+          "name": "UNIFORM",
+          "input_entropy": 4.85203,
+          "output_entropy": 3.742066,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.896082,
+              "mass": 0.989207,
+              "phase": -0.17711,
+              "sum_p": 1.0,
+              "max_prob": 0.034924,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.095082,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.48399,
+              "mass": 0.978219,
+              "phase": -0.376979,
+              "sum_p": 1.0,
+              "max_prob": 0.081877,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.769956,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 4.135311,
+              "mass": 0.962612,
+              "phase": -0.555317,
+              "sum_p": 1.0,
+              "max_prob": 0.129511,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.452257,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.169857,
+              "mass": 0.96531,
+              "phase": -0.726992,
+              "sum_p": 1.0,
+              "max_prob": 0.110885,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.486235,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.13541,
+              "mass": 0.964421,
+              "phase": -0.88201,
+              "sum_p": 1.0,
+              "max_prob": 0.110882,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.455317,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 4.117789,
+              "mass": 0.96438,
+              "phase": -1.023159,
+              "sum_p": 1.0,
+              "max_prob": 0.107383,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.436586,
+              "control": "BRAKE"
+            }
+          ]
+        },
+        {
+          "name": "RANDOM",
+          "input_entropy": 4.35421,
+          "output_entropy": 3.787648,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.893604,
+              "mass": 0.989101,
+              "phase": -0.177195,
+              "sum_p": 1.0,
+              "max_prob": 0.035355,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.094501,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.475271,
+              "mass": 0.977413,
+              "phase": -0.377108,
+              "sum_p": 1.0,
+              "max_prob": 0.085211,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.766467,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 4.119534,
+              "mass": 0.960797,
+              "phase": -0.553757,
+              "sum_p": 1.0,
+              "max_prob": 0.133543,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.442696,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.155841,
+              "mass": 0.963379,
+              "phase": -0.723515,
+              "sum_p": 1.0,
+              "max_prob": 0.1205,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.47974,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.123264,
+              "mass": 0.962697,
+              "phase": -0.876218,
+              "sum_p": 1.0,
+              "max_prob": 0.118636,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.449925,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 4.114656,
+              "mass": 0.963233,
+              "phase": -1.016419,
+              "sum_p": 1.0,
+              "max_prob": 0.113987,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.438669,
+              "control": "BRAKE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 6,
+      "conditions": [
+        {
+          "name": "PEAKED",
+          "input_entropy": 0.063077,
+          "output_entropy": 4.319327,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.675279,
+              "mass": 0.981959,
+              "phase": -0.189092,
+              "sum_p": 1.0,
+              "max_prob": 0.071668,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.970374,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.131973,
+              "mass": 0.959678,
+              "phase": -0.378402,
+              "sum_p": 1.0,
+              "max_prob": 0.135808,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.499471,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 3.761886,
+              "mass": 0.940194,
+              "phase": -0.498017,
+              "sum_p": 1.0,
+              "max_prob": 0.172904,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.075965,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 3.916586,
+              "mass": 0.95427,
+              "phase": -0.634153,
+              "sum_p": 1.0,
+              "max_prob": 0.120266,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.238971,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.061229,
+              "mass": 0.963066,
+              "phase": -0.784201,
+              "sum_p": 1.0,
+              "max_prob": 0.108045,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.377722,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 4.163918,
+              "mass": 0.967307,
+              "phase": -0.941016,
+              "sum_p": 1.0,
+              "max_prob": 0.10611,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.473571,
+              "control": "BRAKE"
+            }
+          ]
+        },
+        {
+          "name": "UNIFORM",
+          "input_entropy": 4.85203,
+          "output_entropy": 4.344056,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.831632,
+              "mass": 0.98751,
+              "phase": -0.18116,
+              "sum_p": 1.0,
+              "max_prob": 0.044713,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.056363,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.326692,
+              "mass": 0.971268,
+              "phase": -0.379578,
+              "sum_p": 1.0,
+              "max_prob": 0.11215,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.644662,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 3.946208,
+              "mass": 0.950985,
+              "phase": -0.532262,
+              "sum_p": 1.0,
+              "max_prob": 0.171318,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.262118,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.037291,
+              "mass": 0.956562,
+              "phase": -0.686016,
+              "sum_p": 1.0,
+              "max_prob": 0.159817,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.355211,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.032747,
+              "mass": 0.959337,
+              "phase": -0.825985,
+              "sum_p": 1.0,
+              "max_prob": 0.125212,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.349851,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 3.812996,
+              "mass": 0.928355,
+              "phase": -0.890524,
+              "sum_p": 1.0,
+              "max_prob": 0.23221,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.17142,
+              "control": "BRAKE"
+            }
+          ]
+        },
+        {
+          "name": "RANDOM",
+          "input_entropy": 4.365946,
+          "output_entropy": 4.339771,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.83274,
+              "mass": 0.987539,
+              "phase": -0.181064,
+              "sum_p": 1.0,
+              "max_prob": 0.043729,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.057433,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.335697,
+              "mass": 0.971887,
+              "phase": -0.379699,
+              "sum_p": 1.0,
+              "max_prob": 0.107189,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.651427,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 3.962125,
+              "mass": 0.952544,
+              "phase": -0.534868,
+              "sum_p": 1.0,
+              "max_prob": 0.163469,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.276493,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.058519,
+              "mass": 0.958657,
+              "phase": -0.691954,
+              "sum_p": 1.0,
+              "max_prob": 0.150749,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.373213,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.038121,
+              "mass": 0.959281,
+              "phase": -0.832348,
+              "sum_p": 1.0,
+              "max_prob": 0.125177,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.356874,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 3.805131,
+              "mass": 0.925228,
+              "phase": -0.89322,
+              "sum_p": 1.0,
+              "max_prob": 0.237651,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.16789,
+              "control": "BRAKE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 7,
+      "conditions": [
+        {
+          "name": "PEAKED",
+          "input_entropy": 0.063077,
+          "output_entropy": 4.416903,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.746333,
+              "mass": 0.984854,
+              "phase": -0.185464,
+              "sum_p": 1.0,
+              "max_prob": 0.056771,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.013422,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.389362,
+              "mass": 0.976383,
+              "phase": -0.385042,
+              "sum_p": 1.0,
+              "max_prob": 0.06713,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.694759,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 4.123243,
+              "mass": 0.965961,
+              "phase": -0.561496,
+              "sum_p": 1.0,
+              "max_prob": 0.107476,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.430209,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.186571,
+              "mass": 0.966021,
+              "phase": -0.734923,
+              "sum_p": 1.0,
+              "max_prob": 0.115104,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.511401,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.065124,
+              "mass": 0.945334,
+              "phase": -0.870647,
+              "sum_p": 1.0,
+              "max_prob": 0.199266,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.455383,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 3.913608,
+              "mass": 0.918572,
+              "phase": -0.945904,
+              "sum_p": 1.0,
+              "max_prob": 0.264372,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.359708,
+              "control": "BRAKE"
+            }
+          ]
+        },
+        {
+          "name": "UNIFORM",
+          "input_entropy": 4.85203,
+          "output_entropy": 4.417865,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.94791,
+              "mass": 0.989883,
+              "phase": -0.172789,
+              "sum_p": 1.0,
+              "max_prob": 0.031695,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.135038,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.651884,
+              "mass": 0.984611,
+              "phase": -0.368864,
+              "sum_p": 1.0,
+              "max_prob": 0.045882,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.894178,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 4.415576,
+              "mass": 0.979868,
+              "phase": -0.566778,
+              "sum_p": 1.0,
+              "max_prob": 0.056613,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.670327,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.484305,
+              "mass": 0.982435,
+              "phase": -0.764653,
+              "sum_p": 1.0,
+              "max_prob": 0.04443,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.723324,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.458108,
+              "mass": 0.981134,
+              "phase": -0.958302,
+              "sum_p": 1.0,
+              "max_prob": 0.052888,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.710233,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 4.404144,
+              "mass": 0.978095,
+              "phase": -1.142569,
+              "sum_p": 1.0,
+              "max_prob": 0.07129,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.679071,
+              "control": "BRAKE"
+            }
+          ]
+        },
+        {
+          "name": "RANDOM",
+          "input_entropy": 4.366598,
+          "output_entropy": 4.425416,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.944112,
+              "mass": 0.989789,
+              "phase": -0.173032,
+              "sum_p": 1.0,
+              "max_prob": 0.032138,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.133014,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.642097,
+              "mass": 0.984179,
+              "phase": -0.369426,
+              "sum_p": 1.0,
+              "max_prob": 0.049302,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.888525,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 4.409174,
+              "mass": 0.979359,
+              "phase": -0.567137,
+              "sum_p": 1.0,
+              "max_prob": 0.060863,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.667585,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.475339,
+              "mass": 0.981898,
+              "phase": -0.764667,
+              "sum_p": 1.0,
+              "max_prob": 0.048863,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.719107,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.443124,
+              "mass": 0.980282,
+              "phase": -0.957172,
+              "sum_p": 1.0,
+              "max_prob": 0.057546,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.701883,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 4.384151,
+              "mass": 0.97711,
+              "phase": -1.138963,
+              "sum_p": 1.0,
+              "max_prob": 0.073169,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.66564,
+              "control": "BRAKE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 8,
+      "conditions": [
+        {
+          "name": "PEAKED",
+          "input_entropy": 0.063077,
+          "output_entropy": 4.219812,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.761455,
+              "mass": 0.98438,
+              "phase": -0.184653,
+              "sum_p": 1.0,
+              "max_prob": 0.075876,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.021801,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.208105,
+              "mass": 0.950635,
+              "phase": -0.37992,
+              "sum_p": 1.0,
+              "max_prob": 0.196141,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.604084,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 3.815681,
+              "mass": 0.914478,
+              "phase": -0.510499,
+              "sum_p": 1.0,
+              "max_prob": 0.271487,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.210451,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 3.93169,
+              "mass": 0.930295,
+              "phase": -0.645856,
+              "sum_p": 1.0,
+              "max_prob": 0.233221,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.329362,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 3.762048,
+              "mass": 0.922197,
+              "phase": -0.722999,
+              "sum_p": 1.0,
+              "max_prob": 0.220228,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.143356,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 3.29206,
+              "mass": 0.838117,
+              "phase": -0.601143,
+              "sum_p": 1.0,
+              "max_prob": 0.3846,
+              "max_entropy": 5.545177,
+              "drift_applied": false,
+              "deficit": 0.0,
+              "control": "NONE"
+            }
+          ]
+        },
+        {
+          "name": "UNIFORM",
+          "input_entropy": 4.85203,
+          "output_entropy": 4.297213,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.80985,
+              "mass": 0.987297,
+              "phase": -0.183362,
+              "sum_p": 1.0,
+              "max_prob": 0.055046,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.030692,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.44003,
+              "mass": 0.977384,
+              "phase": -0.383302,
+              "sum_p": 1.0,
+              "max_prob": 0.093417,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.711461,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 4.243821,
+              "mass": 0.972144,
+              "phase": -0.571117,
+              "sum_p": 1.0,
+              "max_prob": 0.097809,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.50671,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.314985,
+              "mass": 0.975157,
+              "phase": -0.758469,
+              "sum_p": 1.0,
+              "max_prob": 0.082057,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.581944,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.20396,
+              "mass": 0.966423,
+              "phase": -0.922215,
+              "sum_p": 1.0,
+              "max_prob": 0.12049,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.517918,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 4.036947,
+              "mass": 0.955464,
+              "phase": -1.038177,
+              "sum_p": 1.0,
+              "max_prob": 0.134619,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.386416,
+              "control": "BRAKE"
+            }
+          ]
+        },
+        {
+          "name": "RANDOM",
+          "input_entropy": 4.35825,
+          "output_entropy": 4.293304,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.809622,
+              "mass": 0.987213,
+              "phase": -0.183263,
+              "sum_p": 1.0,
+              "max_prob": 0.054043,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.032123,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.42849,
+              "mass": 0.976599,
+              "phase": -0.383145,
+              "sum_p": 1.0,
+              "max_prob": 0.095306,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.705126,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 4.231354,
+              "mass": 0.971193,
+              "phase": -0.569966,
+              "sum_p": 1.0,
+              "max_prob": 0.10126,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.498372,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.297837,
+              "mass": 0.974101,
+              "phase": -0.755766,
+              "sum_p": 1.0,
+              "max_prob": 0.085591,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.569926,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.196724,
+              "mass": 0.96583,
+              "phase": -0.918498,
+              "sum_p": 1.0,
+              "max_prob": 0.12084,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.512411,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 4.035808,
+              "mass": 0.955358,
+              "phase": -1.034652,
+              "sum_p": 1.0,
+              "max_prob": 0.135338,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.384911,
+              "control": "BRAKE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 9,
+      "conditions": [
+        {
+          "name": "PEAKED",
+          "input_entropy": 0.063077,
+          "output_entropy": 4.233994,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.757825,
+              "mass": 0.984198,
+              "phase": -0.184543,
+              "sum_p": 1.0,
+              "max_prob": 0.073497,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.02408,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.249999,
+              "mass": 0.964224,
+              "phase": -0.380685,
+              "sum_p": 1.0,
+              "max_prob": 0.139816,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.601582,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 3.95361,
+              "mass": 0.951899,
+              "phase": -0.534529,
+              "sum_p": 1.0,
+              "max_prob": 0.159859,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.276071,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 3.895449,
+              "mass": 0.936693,
+              "phase": -0.660329,
+              "sum_p": 1.0,
+              "max_prob": 0.210605,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.265593,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 3.929562,
+              "mass": 0.935523,
+              "phase": -0.776191,
+              "sum_p": 1.0,
+              "max_prob": 0.218693,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.320599,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 3.994179,
+              "mass": 0.945508,
+              "phase": -0.893249,
+              "sum_p": 1.0,
+              "max_prob": 0.184486,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.380175,
+              "control": "BRAKE"
+            }
+          ]
+        },
+        {
+          "name": "UNIFORM",
+          "input_entropy": 4.85203,
+          "output_entropy": 4.348186,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.823144,
+              "mass": 0.986703,
+              "phase": -0.18125,
+              "sum_p": 1.0,
+              "max_prob": 0.062824,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.056779,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.384377,
+              "mass": 0.970231,
+              "phase": -0.380954,
+              "sum_p": 1.0,
+              "max_prob": 0.131729,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.71035,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 4.011874,
+              "mass": 0.94765,
+              "phase": -0.543822,
+              "sum_p": 1.0,
+              "max_prob": 0.191427,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.362546,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.205693,
+              "mass": 0.967788,
+              "phase": -0.720691,
+              "sum_p": 1.0,
+              "max_prob": 0.099823,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.524076,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.233786,
+              "mass": 0.967009,
+              "phase": -0.890749,
+              "sum_p": 1.0,
+              "max_prob": 0.120477,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.558761,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 4.230474,
+              "mass": 0.965683,
+              "phase": -1.049741,
+              "sum_p": 1.0,
+              "max_prob": 0.131706,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.563279,
+              "control": "BRAKE"
+            }
+          ]
+        },
+        {
+          "name": "RANDOM",
+          "input_entropy": 4.388379,
+          "output_entropy": 4.352271,
+          "steps": [
+            {
+              "layer": 0,
+              "step": 0,
+              "entropy": 4.817679,
+              "mass": 0.9865,
+              "phase": -0.181572,
+              "sum_p": 1.0,
+              "max_prob": 0.063057,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -2.053564,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 1,
+              "entropy": 4.374164,
+              "mass": 0.96917,
+              "phase": -0.381163,
+              "sum_p": 1.0,
+              "max_prob": 0.133521,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.704094,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 0,
+              "step": 2,
+              "entropy": 3.996129,
+              "mass": 0.945355,
+              "phase": -0.541784,
+              "sum_p": 1.0,
+              "max_prob": 0.194212,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.350611,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 0,
+              "entropy": 4.201548,
+              "mass": 0.966966,
+              "phase": -0.718227,
+              "sum_p": 1.0,
+              "max_prob": 0.104598,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.523415,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 1,
+              "entropy": 4.245845,
+              "mass": 0.968233,
+              "phase": -0.890293,
+              "sum_p": 1.0,
+              "max_prob": 0.11145,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.567496,
+              "control": "BRAKE"
+            },
+            {
+              "layer": 1,
+              "step": 2,
+              "entropy": 4.243714,
+              "mass": 0.966961,
+              "phase": -1.0519,
+              "sum_p": 1.0,
+              "max_prob": 0.1242,
+              "max_entropy": 5.545177,
+              "drift_applied": true,
+              "deficit": -1.57359,
+              "control": "BRAKE"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "conditions": {
+      "PEAKED": {
+        "entropy_trajectory": {
+          "step_0": {
+            "mean": 4.78247,
+            "std": 0.067311,
+            "min": 4.675279,
+            "max": 4.893294
+          },
+          "step_1": {
+            "mean": 4.318108,
+            "std": 0.131747,
+            "min": 4.131973,
+            "max": 4.506627
+          },
+          "step_2": {
+            "mean": 3.957819,
+            "std": 0.162091,
+            "min": 3.746223,
+            "max": 4.210117
+          },
+          "step_3": {
+            "mean": 3.992664,
+            "std": 0.213313,
+            "min": 3.659344,
+            "max": 4.379251
+          },
+          "step_4": {
+            "mean": 3.941484,
+            "std": 0.333564,
+            "min": 3.306641,
+            "max": 4.448937
+          },
+          "step_5": {
+            "mean": 3.839337,
+            "std": 0.491387,
+            "min": 2.817159,
+            "max": 4.430364
+          }
+        },
+        "output_entropy": {
+          "mean": 4.29277,
+          "std": 0.084981
+        },
+        "control_actions": {
+          "brake": 58,
+          "escape": 1,
+          "total_steps": 60
+        }
+      },
+      "UNIFORM": {
+        "entropy_trajectory": {
+          "step_0": {
+            "mean": 4.868966,
+            "std": 0.049013,
+            "min": 4.803046,
+            "max": 4.94791
+          },
+          "step_1": {
+            "mean": 4.443503,
+            "std": 0.131168,
+            "min": 4.245173,
+            "max": 4.667827
+          },
+          "step_2": {
+            "mean": 4.109067,
+            "std": 0.22516,
+            "min": 3.730782,
+            "max": 4.444612
+          },
+          "step_3": {
+            "mean": 4.17537,
+            "std": 0.203164,
+            "min": 3.70305,
+            "max": 4.484305
+          },
+          "step_4": {
+            "mean": 4.156836,
+            "std": 0.204137,
+            "min": 3.633906,
+            "max": 4.458108
+          },
+          "step_5": {
+            "mean": 4.110007,
+            "std": 0.231018,
+            "min": 3.591249,
+            "max": 4.404144
+          }
+        },
+        "output_entropy": {
+          "mean": 4.23301,
+          "std": 0.198531
+        },
+        "control_actions": {
+          "brake": 60,
+          "escape": 0,
+          "total_steps": 60
+        }
+      },
+      "RANDOM": {
+        "entropy_trajectory": {
+          "step_0": {
+            "mean": 4.865525,
+            "std": 0.048495,
+            "min": 4.799309,
+            "max": 4.944112
+          },
+          "step_1": {
+            "mean": 4.437192,
+            "std": 0.130207,
+            "min": 4.22848,
+            "max": 4.663738
+          },
+          "step_2": {
+            "mean": 4.105681,
+            "std": 0.221009,
+            "min": 3.742452,
+            "max": 4.442293
+          },
+          "step_3": {
+            "mean": 4.171989,
+            "std": 0.199305,
+            "min": 3.704277,
+            "max": 4.475339
+          },
+          "step_4": {
+            "mean": 4.152189,
+            "std": 0.207301,
+            "min": 3.612338,
+            "max": 4.443124
+          },
+          "step_5": {
+            "mean": 4.103091,
+            "std": 0.241305,
+            "min": 3.541967,
+            "max": 4.384151
+          }
+        },
+        "output_entropy": {
+          "mean": 4.239773,
+          "std": 0.186755
+        },
+        "control_actions": {
+          "brake": 60,
+          "escape": 0,
+          "total_steps": 60
+        }
+      }
+    }
+  }
+}
