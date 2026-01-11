@@ -25,6 +25,10 @@ class RefinementStep:
     phase: float
     drift_applied: bool = False
     deficit: float = 0.0
+    # Normalization diagnostics
+    sum_p: float = 1.0      # Should always be 1.0 if normalized
+    max_prob: float = 0.0   # Peakedness indicator
+    max_entropy: float = 0.0  # ln(K) for reference
 
 
 class RecursiveRefinementBlock(nn.Module):
@@ -202,28 +206,36 @@ class CoherentEntropyReactor(nn.Module):
 
     def apply_drift(self, z: torch.Tensor) -> Tuple[torch.Tensor, bool, float]:
         """
-        Escape entropy cage via latent perturbation.
+        Symmetric entropy control via perturbation OR sharpening.
 
-        When entropy falls below target, inject noise proportional
-        to the deficit (clamped to prevent runaway).
+        - If entropy < target: inject noise (escape cage)
+        - If entropy > target + margin: sharpen via temperature (entropy brake)
 
         Returns:
             z: Modified tensor
-            drift_applied: Whether drift was applied
-            deficit: The entropy deficit (clamped)
+            drift_applied: Whether any control was applied
+            deficit: The entropy deficit/excess (signed)
         """
         with torch.no_grad():
             current_entropy = self.compute_entropy(z)
+            margin = 0.5  # Hysteresis margin
 
+            # ESCAPE: entropy too low → add noise
             if current_entropy < self.target_entropy:
-                # Compute and clamp deficit to prevent runaway noise
                 raw_deficit = self.target_entropy - current_entropy
                 deficit = min(raw_deficit.item(), self.max_drift_deficit)
-
-                # Deficit-proportional noise injection
                 noise = torch.randn_like(z) * deficit * self.drift_strength
                 z = z + noise
                 return z, True, deficit
+
+            # BRAKE: entropy too high → sharpen distribution
+            if current_entropy > self.target_entropy + margin:
+                excess = current_entropy - self.target_entropy
+                # Temperature < 1 sharpens; scale by excess
+                temp = max(0.5, 1.0 - excess.item() * 0.1)
+                # Apply sharpening via scaling (amplifies peaks)
+                z = z * (1.0 / temp)
+                return z, True, -excess.item()
 
         return z, False, 0.0
 
@@ -284,8 +296,10 @@ class CoherentEntropyReactor(nn.Module):
                     entropy = self.compute_entropy(z).item()
                     masses.append(mass)
 
-                    # Log trajectory step
+                    # Log trajectory step with normalization diagnostics
                     if track_trajectory:
+                        probs = F.softmax(z, dim=-1)
+                        K = z.shape[-1]
                         self.trajectory.append(RefinementStep(
                             layer_idx=layer_idx,
                             step_idx=step_idx,
@@ -293,7 +307,10 @@ class CoherentEntropyReactor(nn.Module):
                             mass=mass.item(),
                             phase=self.phase.item(),
                             drift_applied=drift_applied,
-                            deficit=deficit
+                            deficit=deficit,
+                            sum_p=probs.sum(dim=-1).mean().item(),
+                            max_prob=probs.max(dim=-1).values.mean().item(),
+                            max_entropy=math.log(K)
                         ))
 
         # Project to output
