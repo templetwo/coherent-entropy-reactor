@@ -1,18 +1,13 @@
-"""
-Coherent Entropy Reactor - Core Architecture
-
-A recursive small network with liquid dynamics that:
-- Measures its own semantic mass
-- Resists perturbation via adaptive loops
-- Emerges coherence from chaos
-"""
-
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from typing import Tuple, Optional, List, Dict
 from dataclasses import dataclass
 import math
+
+# Integration of specialized components
+from src.liquid.dynamics import LiquidLayer
+from src.entropy.measurement import SemanticMass, EntropyTracker
 
 
 @dataclass
@@ -26,88 +21,21 @@ class RefinementStep:
     drift_applied: bool = False
     deficit: float = 0.0
     # Normalization diagnostics
-    sum_p: float = 1.0      # Should always be 1.0 if normalized
-    max_prob: float = 0.0   # Peakedness indicator
-    max_entropy: float = 0.0  # ln(K) for reference
-
-
-class RecursiveRefinementBlock(nn.Module):
-    """
-    TRM-style recursive refinement block.
-
-    Refines latent state z through multiple passes,
-    accumulating semantic mass at each step.
-    """
-
-    def __init__(self, hidden_dim: int, num_heads: int = 4, dropout: float = 0.1):
-        super().__init__()
-        self.hidden_dim = hidden_dim
-
-        # Self-attention for internal coherence
-        self.self_attn = nn.MultiheadAttention(
-            hidden_dim, num_heads, dropout=dropout, batch_first=True
-        )
-
-        # Feed-forward for state transformation
-        self.ffn = nn.Sequential(
-            nn.Linear(hidden_dim, hidden_dim * 4),
-            nn.GELU(),
-            nn.Dropout(dropout),
-            nn.Linear(hidden_dim * 4, hidden_dim),
-            nn.Dropout(dropout)
-        )
-
-        # Layer norms
-        self.norm1 = nn.LayerNorm(hidden_dim)
-        self.norm2 = nn.LayerNorm(hidden_dim)
-
-    def forward(self, z: torch.Tensor) -> torch.Tensor:
-        """
-        Refine latent state z.
-
-        Args:
-            z: Latent state [batch, seq, hidden]
-
-        Returns:
-            Refined state z'
-        """
-        # Self-attention with residual
-        z_norm = self.norm1(z)
-        attn_out, _ = self.self_attn(z_norm, z_norm, z_norm)
-        z = z + attn_out
-
-        # FFN with residual
-        z = z + self.ffn(self.norm2(z))
-
-        return z
+    sum_p: float = 1.0
+    max_prob: float = 0.0
+    max_entropy: float = 0.0
 
 
 class EntropyEncoder(nn.Module):
     """
     Encodes input probability distributions into latent entropy field.
-
-    Unlike token embeddings, this operates on continuous distributions.
     """
-
     def __init__(self, input_dim: int, hidden_dim: int):
         super().__init__()
-
-        # Project distribution parameters to hidden space
         self.proj = nn.Linear(input_dim, hidden_dim)
-
-        # Entropy-aware normalization
         self.norm = nn.LayerNorm(hidden_dim)
 
     def forward(self, dist: torch.Tensor) -> torch.Tensor:
-        """
-        Encode probability distribution.
-
-        Args:
-            dist: Input distribution [batch, seq, input_dim]
-
-        Returns:
-            Entropy field z [batch, seq, hidden]
-        """
         z = self.proj(dist)
         z = self.norm(z)
         return z
@@ -119,20 +47,9 @@ class CoherentEntropyReactor(nn.Module):
 
     A recursive network that:
     1. Encodes entropy distributions (not tokens)
-    2. Refines through liquid dynamics
-    3. Measures its own semantic mass
+    2. Refines through Liquid Neural Network (LNN) layers
+    3. Measures its own semantic mass via Fisher Information
     4. Outputs reactions + evolved state
-
-    Args:
-        input_dim: Dimension of input distributions
-        hidden_dim: Hidden state dimension
-        output_dim: Output dimension
-        num_layers: Number of recursive refinement layers
-        num_refinement_steps: Recursive passes per layer
-        kuramoto_k: Kuramoto coupling strength
-        target_entropy: Target entropy in nats (2-4)
-        drift_strength: Noise scale for cage escape (0.1 default)
-        max_drift_deficit: Maximum deficit for drift clamping (2.0 default)
     """
 
     def __init__(
@@ -141,7 +58,7 @@ class CoherentEntropyReactor(nn.Module):
         hidden_dim: int = 256,
         output_dim: int = 128,
         num_layers: int = 2,
-        num_refinement_steps: int = 3,
+        num_refinement_steps: int = 3,  # Preserved for API compat, but LiquidLayer handles integration
         kuramoto_k: float = 2.0,
         target_entropy: float = 3.0,
         drift_strength: float = 0.1,
@@ -152,8 +69,6 @@ class CoherentEntropyReactor(nn.Module):
 
         self.hidden_dim = hidden_dim
         self.num_layers = num_layers
-        self.num_refinement_steps = num_refinement_steps
-        self.kuramoto_k = kuramoto_k
         self.target_entropy = target_entropy
         self.drift_strength = drift_strength
         self.max_drift_deficit = max_drift_deficit
@@ -161,64 +76,42 @@ class CoherentEntropyReactor(nn.Module):
         # Entropy encoder
         self.encoder = EntropyEncoder(input_dim, hidden_dim)
 
-        # Recursive refinement layers
+        # Liquid Neural Network Layers (Replaces RecursiveRefinementBlock)
+        # Note: LiquidLayer projects hidden->input internally for residual, 
+        # so we configure it to maintain hidden_dim flow.
         self.layers = nn.ModuleList([
-            RecursiveRefinementBlock(hidden_dim, dropout=dropout)
+            LiquidLayer(
+                input_dim=hidden_dim, # We operate in hidden space after encoding
+                hidden_dim=hidden_dim,
+                kuramoto_k=kuramoto_k,
+                integration_steps=num_refinement_steps # Mapping refinement steps to ODE steps
+            )
             for _ in range(num_layers)
         ])
 
         # Output projection
         self.output_proj = nn.Linear(hidden_dim, output_dim)
 
-        # Trajectory tracking (per-step metrics)
+        # Components
+        self.tracker = EntropyTracker(target_entropy=target_entropy)
+        
+        # Trajectory tracking
         self.trajectory: List[RefinementStep] = []
-
-        # Legacy mass history (for backward compat)
         self.mass_history: List[float] = []
-
-        # Phase state for Kuramoto coupling
-        self.register_buffer('phase', torch.zeros(1))
 
     def compute_entropy(self, z: torch.Tensor) -> torch.Tensor:
         """Compute entropy of latent state distribution."""
-        # Treat z as logits, compute softmax entropy
         probs = F.softmax(z, dim=-1)
         entropy = -torch.sum(probs * torch.log(probs + 1e-10), dim=-1)
         return entropy.mean()
 
-    def compute_semantic_mass(self, z: torch.Tensor) -> torch.Tensor:
-        """
-        Compute semantic mass via analytic Fisher Information proxy.
-
-        For categorical distribution p = softmax(z), the Fisher trace proxy is:
-            1 - sum_i(p_i^2)
-
-        Properties:
-        - Near 0 when distribution is peaked (low entropy, low mass)
-        - Near 1 - 1/K when uniform (high entropy, high mass)
-        - No autograd needed, fast and stable
-        - Theoretically aligned with Fisher Information for softmax
-        """
-        probs = F.softmax(z, dim=-1)
-        # Fisher proxy: 1 - sum(p^2) per position, averaged
-        fisher_proxy = (1.0 - (probs ** 2).sum(dim=-1)).mean()
-        return fisher_proxy
-
     def apply_drift(self, z: torch.Tensor) -> Tuple[torch.Tensor, bool, float]:
         """
         Symmetric entropy control via perturbation OR sharpening.
-
-        - If entropy < target: inject noise (escape cage)
-        - If entropy > target + margin: sharpen via temperature (entropy brake)
-
-        Returns:
-            z: Modified tensor
-            drift_applied: Whether any control was applied
-            deficit: The entropy deficit/excess (signed)
         """
         with torch.no_grad():
             current_entropy = self.compute_entropy(z)
-            margin = 0.5  # Hysteresis margin
+            margin = 0.5
 
             # ESCAPE: entropy too low → add noise
             if current_entropy < self.target_entropy:
@@ -228,31 +121,14 @@ class CoherentEntropyReactor(nn.Module):
                 z = z + noise
                 return z, True, deficit
 
-            # BRAKE: entropy too high → sharpen distribution
+            # BRAKE: entropy too high → sharpen
             if current_entropy > self.target_entropy + margin:
                 excess = current_entropy - self.target_entropy
-                # Temperature < 1 sharpens; scale by excess
                 temp = max(0.5, 1.0 - excess.item() * 0.1)
-                # Apply sharpening via scaling (amplifies peaks)
                 z = z * (1.0 / temp)
                 return z, True, -excess.item()
 
         return z, False, 0.0
-
-    def kuramoto_step(self, z: torch.Tensor) -> torch.Tensor:
-        """
-        Apply Kuramoto oscillator dynamics to modulate state.
-
-        T = T_base + A * sin(φ_mean)
-        """
-        # Update phase based on current entropy
-        current_entropy = self.compute_entropy(z)
-        phase_delta = self.kuramoto_k * torch.sin(self.target_entropy - current_entropy)
-        self.phase = self.phase + phase_delta * 0.1
-
-        # Modulate z based on phase
-        modulation = 1.0 + 0.3 * torch.sin(self.phase)
-        return z * modulation
 
     def forward(
         self,
@@ -261,62 +137,59 @@ class CoherentEntropyReactor(nn.Module):
         track_trajectory: bool = True
     ) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
         """
-        React to input distribution.
-
-        Args:
-            x: Input distribution [batch, seq, input_dim]
-            return_mass: Whether to compute and return semantic mass
-            track_trajectory: Whether to log per-step metrics
-
-        Returns:
-            y: Output reaction [batch, seq, output_dim]
-            mass: Semantic mass (if return_mass=True)
+        React to input distribution through Liquid Core.
         """
         # Encode input to entropy field
         z = self.encoder(x)
-
-        # Track mass through refinement
+        
+        # Initial hidden state for liquid cells
+        h = None 
         masses = []
 
-        # Recursive refinement with liquid dynamics
+        # Process through Liquid Layers
         for layer_idx, layer in enumerate(self.layers):
-            for step_idx in range(self.num_refinement_steps):
-                # Refine state
-                z = layer(z)
+            # LiquidLayer handles the recursive ODE integration internally
+            # z is treated as the sequence [batch, seq, hidden]
+            z, h = layer(z, h=h)
 
-                # Apply Kuramoto modulation (oscillatory)
-                z = self.kuramoto_step(z)
+            # Apply drift control (Entropy intervention)
+            z, drift_applied, deficit = self.apply_drift(z)
 
-                # Apply drift if trapped in cage (corrective)
-                z, drift_applied, deficit = self.apply_drift(z)
+            # Record metrics
+            if return_mass or track_trajectory:
+                # Use robust Fisher mass computation
+                # We use 'empirical' here to avoid second-order gradients during forward pass overhead,
+                # or we could implement a fast proxy in SemanticMass if needed.
+                # For speed in forward pass, we'll stick to the lightweight proxy logic *inside* SemanticMass 
+                # if we implemented one, but since SemanticMass currently uses gradient/empirical,
+                # let's use a simplified analytic proxy here for performance, 
+                # OR trust the user wants the real deal. 
+                # Let's use the analytic proxy logic from the original class but implemented cleanly.
+                probs = F.softmax(z, dim=-1)
+                mass = (1.0 - (probs ** 2).sum(dim=-1)).mean() # Fast analytic proxy
+                
+                entropy = self.compute_entropy(z).item()
+                self.tracker.record(entropy)
+                masses.append(mass)
 
-                # Compute metrics
-                if return_mass or track_trajectory:
-                    mass = self.compute_semantic_mass(z)
-                    entropy = self.compute_entropy(z).item()
-                    masses.append(mass)
-
-                    # Log trajectory step with normalization diagnostics
-                    if track_trajectory:
-                        probs = F.softmax(z, dim=-1)
-                        K = z.shape[-1]
-                        self.trajectory.append(RefinementStep(
-                            layer_idx=layer_idx,
-                            step_idx=step_idx,
-                            entropy=entropy,
-                            mass=mass.item(),
-                            phase=self.phase.item(),
-                            drift_applied=drift_applied,
-                            deficit=deficit,
-                            sum_p=probs.sum(dim=-1).mean().item(),
-                            max_prob=probs.max(dim=-1).values.mean().item(),
-                            max_entropy=math.log(K)
-                        ))
+                if track_trajectory:
+                    K = z.shape[-1]
+                    self.trajectory.append(RefinementStep(
+                        layer_idx=layer_idx,
+                        step_idx=0, # LiquidLayer abstracts steps, so we log per layer
+                        entropy=entropy,
+                        mass=mass.item(),
+                        phase=layer.get_order_parameter(), # Get Kuramoto order
+                        drift_applied=drift_applied,
+                        deficit=deficit,
+                        sum_p=probs.sum(dim=-1).mean().item(),
+                        max_prob=probs.max(dim=-1).values.mean().item(),
+                        max_entropy=math.log(K)
+                    ))
 
         # Project to output
         y = self.output_proj(z)
 
-        # Compute final mass
         final_mass = None
         if return_mass and masses:
             final_mass = torch.stack(masses).mean()
@@ -324,88 +197,64 @@ class CoherentEntropyReactor(nn.Module):
 
         return y, final_mass
 
-    def react(
-        self,
-        input_dist: torch.Tensor
-    ) -> Tuple[torch.Tensor, float]:
-        """
-        Simplified interface for reaction.
-
-        Args:
-            input_dist: Input probability distribution
-
-        Returns:
-            output: Reaction output
-            mass: Current semantic mass
-        """
+    def react(self, input_dist: torch.Tensor) -> Tuple[torch.Tensor, float]:
         output, mass = self.forward(input_dist, return_mass=True)
         return output, mass.item() if mass is not None else 0.0
 
     def get_mass_history(self) -> List[float]:
-        """Return history of semantic mass measurements."""
         return self.mass_history
 
     def get_trajectory(self) -> List[RefinementStep]:
-        """Return full trajectory of refinement steps."""
         return self.trajectory
 
     def reset_history(self):
-        """Clear all history (mass and trajectory)."""
         self.mass_history = []
         self.trajectory = []
-
-    def reset_mass_history(self):
-        """Clear mass history (legacy compat)."""
-        self.mass_history = []
+        self.tracker.reset()
 
 
 def count_parameters(model: nn.Module) -> int:
-    """Count trainable parameters."""
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
 
 if __name__ == "__main__":
-    # Quick test
-    print("Coherent Entropy Reactor - Test")
-    print("=" * 50)
+    # Integration Test
+    print("Coherent Entropy Reactor (Liquid Core) - Integration Test")
+    print("=" * 60)
 
     reactor = CoherentEntropyReactor(
         input_dim=128,
         hidden_dim=256,
         output_dim=128,
         num_layers=2,
-        num_refinement_steps=3,
         kuramoto_k=2.0,
-        target_entropy=3.0,
-        drift_strength=0.1,
-        max_drift_deficit=2.0
+        target_entropy=3.0
     )
 
     print(f"Parameters: {count_parameters(reactor):,}")
-
-    # Test with random distribution
+    
+    # Generate random probability distribution
     batch_size = 4
     seq_len = 16
     x = torch.randn(batch_size, seq_len, 128)
-    x = F.softmax(x, dim=-1)  # Make it a distribution
+    x = F.softmax(x, dim=-1)
 
+    print("\nProcessing...")
     output, mass = reactor.react(x)
 
-    # Compute output entropy
     probs = F.softmax(output, dim=-1)
     entropy = -torch.sum(probs * torch.log(probs + 1e-10), dim=-1).mean().item()
 
-    print(f"\nInput shape: {x.shape}")
+    print(f"Input shape: {x.shape}")
     print(f"Output shape: {output.shape}")
-    print(f"Semantic mass (Fisher proxy): {mass:.6f}")
-    print(f"Output entropy: {entropy:.2f} nats")
-    print(f"Phase state: {reactor.phase.item():.4f} rad")
-
-    # Show trajectory
-    trajectory = reactor.get_trajectory()
-    print(f"\nTrajectory ({len(trajectory)} steps):")
-    print(f"{'Layer':<6} {'Step':<5} {'Entropy':<10} {'Mass':<10} {'Phase':<10} {'Drift':<6}")
-    print("-" * 55)
-    for step in trajectory:
+    print(f"Semantic Mass: {mass:.6f}")
+    print(f"Output Entropy: {entropy:.2f} nats")
+    print(f"Entropy Zone: {reactor.tracker.get_zone(entropy)}")
+    
+    traj = reactor.get_trajectory()
+    print(f"\nTrajectory ({len(traj)} layers):")
+    print(f"{'Layer':<6} {'Entropy':<10} {'Mass':<10} {'Phase (R)':<10} {'Drift':<6}")
+    print("-" * 50)
+    for step in traj:
         drift_str = f"{step.deficit:.2f}" if step.drift_applied else "-"
-        print(f"{step.layer_idx:<6} {step.step_idx:<5} {step.entropy:<10.3f} {step.mass:<10.4f} {step.phase:<10.4f} {drift_str:<6}")
+        print(f"{step.layer_idx:<6} {step.entropy:<10.3f} {step.mass:<10.4f} {step.phase:<10.4f} {drift_str:<6}")
