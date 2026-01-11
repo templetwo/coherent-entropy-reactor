@@ -166,34 +166,17 @@ class CoherentEntropyReactor(nn.Module):
 
         M_semantic = (1/N) * Tr(I(θ))
 
-        Approximated by gradient magnitude.
+        Approximated by variance of activations (simpler, more stable).
         """
-        if not z.requires_grad:
-            z = z.detach().requires_grad_(True)
+        # Compute variance-based mass (proxy for Fisher trace)
+        # Higher variance = more distributed = more "massive"
+        variance = z.var(dim=-1).mean()
 
-        # Compute pseudo-Fisher via gradient of entropy
-        entropy = self.compute_entropy(z)
+        # Also factor in the magnitude (energy)
+        magnitude = (z ** 2).mean()
 
-        if z.grad is not None:
-            z.grad.zero_()
-
-        # Get gradients
-        grad = torch.autograd.grad(
-            entropy, z,
-            create_graph=True,
-            retain_graph=True,
-            allow_unused=True
-        )[0]
-
-        if grad is None:
-            return torch.tensor(0.0, device=z.device)
-
-        # Fisher trace approximation: sum of squared gradients
-        fisher_trace = (grad ** 2).sum()
-
-        # Normalize by parameter count
-        n_params = z.numel()
-        mass = fisher_trace / n_params
+        # Combined mass metric
+        mass = variance * magnitude
 
         return mass
 
@@ -236,7 +219,7 @@ class CoherentEntropyReactor(nn.Module):
 
         # Recursive refinement with liquid dynamics
         for layer in self.layers:
-            for step in range(self.num_refinement_steps):
+            for _ in range(self.num_refinement_steps):
                 # Refine state
                 z = layer(z)
 
