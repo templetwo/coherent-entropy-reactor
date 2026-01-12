@@ -428,39 +428,42 @@
             // Merkabah (Sacred Geometry) - PBR Materials
             merkabah = new THREE.Group();
 
-            // Wireframe with emissive glow
+            // Wireframe with STRONG emissive glow
             const wireMat = new THREE.MeshStandardMaterial({
-                color: 0xd4af37,
-                emissive: 0xd4af37,
-                emissiveIntensity: 0.4,
+                color: 0xffdd44,  // Brighter gold
+                emissive: 0xffcc00,
+                emissiveIntensity: 1.2,  // BOOSTED from 0.4
                 wireframe: true,
                 transparent: true,
-                opacity: 0.6,
+                opacity: 0.95,  // BOOSTED from 0.6
                 metalness: 0.9,
-                roughness: 0.2
+                roughness: 0.1
             });
 
-            // Solid core with glass-like material
+            // Solid core with glass-like material (BRIGHTER)
             const glassMat = new THREE.MeshPhysicalMaterial({
-                color: 0xd4af37,
+                color: 0xffdd44,
+                emissive: 0xffcc00,
+                emissiveIntensity: 0.4,
                 metalness: 0.1,
                 roughness: 0.05,
                 transparent: true,
-                opacity: 0.15,
-                transmission: 0.9,
+                opacity: 0.5,  // BOOSTED from 0.15
+                transmission: 0.6,
                 ior: 1.5
             });
 
             const tetraGeo = new THREE.TetrahedronGeometry(40, 0);
 
-            // Two counter-rotating tetrahedrons (wireframe)
+            // Two counter-rotating tetrahedrons (BOTH VISIBLE)
             const t1 = new THREE.Mesh(tetraGeo, wireMat);
-            const t2 = new THREE.Mesh(tetraGeo, wireMat.clone());
+            const t2 = new THREE.Mesh(tetraGeo.clone(), wireMat.clone());
             t2.rotation.y = Math.PI;
             t2.rotation.z = Math.PI;
+            t2.scale.set(1.08, 1.08, 1.08);  // Slightly larger so both are visible
 
-            // Glass core
-            const core = new THREE.Mesh(new THREE.SphereGeometry(15, 32, 32), glassMat);
+            // Glass core (BRIGHTER + LARGER)
+            const core = new THREE.Mesh(new THREE.SphereGeometry(20, 32, 32), glassMat);
 
             merkabah.add(t1, t2, core);
             scene.add(merkabah);
