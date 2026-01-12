@@ -71,8 +71,10 @@
         .ui-element {
             pointer-events: auto;
             /* Enable only on UI cards */
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 10, 0.7);
+            /* SEMI-TRANSPARENT, not opaque */
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-gold);
         }
 
         /* Header spans full width */
@@ -455,12 +457,11 @@
 
             const tetraGeo = new THREE.TetrahedronGeometry(40, 0);
 
-            // Two counter-rotating tetrahedrons (BOTH VISIBLE)
-            const t1 = new THREE.Mesh(tetraGeo, wireMat);
-            const t2 = new THREE.Mesh(tetraGeo.clone(), wireMat.clone());
-            t2.rotation.y = Math.PI;
-            t2.rotation.z = Math.PI;
-            t2.scale.set(1.08, 1.08, 1.08);  // Slightly larger so both are visible
+            // Two counter-rotating tetrahedrons - STAR OF DAVID / MERKABA
+            const t1 = new THREE.Mesh(tetraGeo, wireMat);  // Pointing UP
+            const t2 = new THREE.Mesh(tetraGeo.clone(), wireMat.clone());  // Pointing DOWN (inverted)
+            t2.rotation.x = Math.PI;  // Flip upside down to create Star of David
+            t2.scale.set(1.0, 1.0, 1.0);  // Same size, perfectly overlaid
 
             // Glass core (BRIGHTER + LARGER)
             const core = new THREE.Mesh(new THREE.SphereGeometry(20, 32, 32), glassMat);
