@@ -1,0 +1,36 @@
+reactor:
+  input_dim: 128
+  hidden_dim: 256
+  output_dim: 128
+  num_layers: 2
+  target_entropy: 3.0
+  drift_strength: 0.1
+  max_drift_deficit: 2.0
+  
+  kuramoto:
+    coupling_strength: 2.0
+    n_oscillators: 8
+    natural_frequency: 1.0
+    amplitude: 0.4
+    base_temperature: 0.8
+
+dashboard:
+  host: localhost
+  port: 8080
+  debug: false
+  
+  3d_visuals:
+    enable_bloom: true
+    enable_particles: true
+    enable_dof: false  # depth of field (expensive)
+    max_particles: 1000
+    merkabah_opacity: 0.3
+    auto_rotate: false
+    camera:
+      min_distance: 50
+      max_distance: 500
+      initial_position: [150, 100, 150]
+  
+  oracle:
+    auto_sample_rate: 0.5  # seconds between samples
+    vocab_size: 30

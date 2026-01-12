@@ -54,32 +54,36 @@
         }
 
         .ui-layer {
-            position: relative;
+            position: fixed;
             z-index: 10;
             width: 100%;
             height: 100vh;
-            pointer-events: none;
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: 300px 1fr 300px;
+            grid-template-rows: auto 1fr auto;
+            gap: 15px;
             padding: 20px;
             box-sizing: border-box;
+            pointer-events: none;
+            /* Keep off by default */
         }
 
         .ui-element {
             pointer-events: auto;
+            /* Enable only on UI cards */
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
         }
 
-
+        /* Header spans full width */
         .header {
-            width: 100%;
+            grid-column: 1 / -1;
+            grid-row: 1;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding-bottom: 15px;
             border-bottom: 1px solid var(--border-gold);
-            position: relative;
-            z-index: 100;
-            /* Force header above everything */
             pointer-events: auto;
         }
 
@@ -88,9 +92,6 @@
             display: flex;
             gap: 10px;
             align-items: center;
-            position: relative;
-            z-index: 101;
-            /* Force buttons to top */
             pointer-events: auto;
         }
 
@@ -296,7 +297,7 @@
 
     <div class="ui-layer">
         <div class="header ui-element">
-            <h1>TEMPLE OBSERVATORY v3.0 // <span style="font-weight: 300;">3D FIELDTomography</span></h1>
+            <h1>TEMPLE OBSERVATORY v3.1 // <span style="font-weight: 300;">3D FIELD Tomography</span></h1>
             <div class="controls">
                 <button id="audioToggle">🔊 LISTEN</button>
                 <select id="audioMode">
@@ -308,6 +309,7 @@
                 <button id="oracleBtn">ORACLE</button>
                 <button id="recordBtn">Record</button>
                 <button id="markBtn">Mark</button>
+                <button id="exportBtn" title="Export trajectory data as CSV">📊 Export</button>
                 <button id="resetBtn">Purge</button>
             </div>
         </div>
@@ -397,7 +399,7 @@
 
         function init3D() {
             scene = new THREE.Scene();
-            scene.fog = new THREE.FogExp2(0x000000, 0.002);
+            scene.fog = new THREE.FogExp2(0x000000, 0.001);
 
             camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
             camera.position.set(150, 100, 150);
@@ -405,52 +407,93 @@
 
             renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.2;
             document.getElementById('observatory-viewport').appendChild(renderer.domElement);
 
-            // Lighting
-            const ambLight = new THREE.AmbientLight(0xd4af37, 0.2);
-            scene.add(ambLight);
-            const ptLight = new THREE.PointLight(0xffcc00, 1, 500);
-            ptLight.position.set(100, 100, 100);
-            scene.add(ptLight);
+            // Enhanced Lighting for PBR
+            const hemiLight = new THREE.HemisphereLight(0xd4af37, 0x1a1a1a, 0.6);
+            scene.add(hemiLight);
 
-            // Merkabah (Sacred Geometry)
+            const spotLight1 = new THREE.SpotLight(0xffcc00, 2, 600, Math.PI / 6, 0.5, 1);
+            spotLight1.position.set(150, 200, 150);
+            spotLight1.castShadow = false;  // Disable shadows for performance
+            scene.add(spotLight1);
+
+            const spotLight2 = new THREE.SpotLight(0x8888ff, 1, 400, Math.PI / 8, 0.3, 1);
+            spotLight2.position.set(-100, 150, -100);
+            scene.add(spotLight2);
+
+            // Merkabah (Sacred Geometry) - PBR Materials
             merkabah = new THREE.Group();
-            const mat = new THREE.MeshBasicMaterial({ color: 0xd4af37, wireframe: true, transparent: true, opacity: 0.1 });
 
-            const tetraGeo = new THREE.TetrahedronGeometry(40);
-            const t1 = new THREE.Mesh(tetraGeo, mat);
-            const t2 = new THREE.Mesh(tetraGeo, mat);
+            // Wireframe with emissive glow
+            const wireMat = new THREE.MeshStandardMaterial({
+                color: 0xd4af37,
+                emissive: 0xd4af37,
+                emissiveIntensity: 0.4,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.6,
+                metalness: 0.9,
+                roughness: 0.2
+            });
+
+            // Solid core with glass-like material
+            const glassMat = new THREE.MeshPhysicalMaterial({
+                color: 0xd4af37,
+                metalness: 0.1,
+                roughness: 0.05,
+                transparent: true,
+                opacity: 0.15,
+                transmission: 0.9,
+                ior: 1.5
+            });
+
+            const tetraGeo = new THREE.TetrahedronGeometry(40, 0);
+
+            // Two counter-rotating tetrahedrons (wireframe)
+            const t1 = new THREE.Mesh(tetraGeo, wireMat);
+            const t2 = new THREE.Mesh(tetraGeo, wireMat.clone());
             t2.rotation.y = Math.PI;
             t2.rotation.z = Math.PI;
 
-            merkabah.add(t1, t2);
+            // Glass core
+            const core = new THREE.Mesh(new THREE.SphereGeometry(15, 32, 32), glassMat);
+
+            merkabah.add(t1, t2, core);
             scene.add(merkabah);
 
-            // Trajectory Group
+            // Trajectory Particle System
             trajectoryGroup = new THREE.Group();
             scene.add(trajectoryGroup);
 
-            // Grid Floor
-            const grid = new THREE.GridHelper(400, 20, 0x333333, 0x111111);
+            // Grid Floor with gradient
+            const grid = new THREE.GridHelper(400, 20, 0x444444, 0x222222);
             grid.position.y = -50;
+            grid.material.opacity = 0.4;
+            grid.material.transparent = true;
             scene.add(grid);
 
-            // OrbitControls
-            // OrbitControls (Safe Init)
+            // OrbitControls with Bounds
             try {
                 if (typeof THREE.OrbitControls !== 'undefined') {
                     controls = new THREE.OrbitControls(camera, renderer.domElement);
                     controls.enableDamping = true;
                     controls.dampingFactor = 0.05;
+                    controls.minDistance = 50;
+                    controls.maxDistance = 500;
                     controls.autoRotate = false;
+                    controls.enablePan = true;
+                    controls.panSpeed = 0.5;
+                    controls.rotateSpeed = 0.8;
 
                     controls.addEventListener('start', () => {
                         is3DAutoRotate = false;
                     });
                 } else {
-                    console.warn("OrbitControls not loaded. Rotating manually.");
+                    console.warn("OrbitControls not loaded. Falling back to auto-rotation.");
                 }
             } catch (e) {
                 console.error("OrbitControls init failed:", e);
@@ -465,17 +508,34 @@
 
         function addTrajectoryPoint(x, y, z, coherence) {
             // Scale metrics for 3D space
-            // x: entropy (4.0 - 5.0) -> (-50 to 50)
-            // y: mass (0.9 - 1.0) -> (-50 to 50)
-            // z: coherence (0.0 - 1.0) -> (-50 to 50)
             const px = (x - 4.5) * 100;
             const py = (y - 0.95) * 500;
             const pz = (coherence - 0.5) * 100;
 
-            const pointGeo = new THREE.SphereGeometry(1.5, 8, 8);
-            const pointMat = new THREE.MeshBasicMaterial({ color: 0xffcc00, transparent: true });
+            // Create glowing particle
+            const pointGeo = new THREE.SphereGeometry(2, 16, 16);
+            const pointMat = new THREE.MeshStandardMaterial({
+                color: 0xffcc00,
+                emissive: 0xffcc00,
+                emissiveIntensity: 1.0,
+                metalness: 0.3,
+                roughness: 0.4,
+                transparent: true
+            });
             const pointMesh = new THREE.Mesh(pointGeo, pointMat);
             pointMesh.position.set(px, py, pz);
+
+            // Add glow sphere
+            const glowGeo = new THREE.SphereGeometry(3, 8, 8);
+            const glowMat = new THREE.MeshBasicMaterial({
+                color: 0xffcc00,
+                transparent: true,
+                opacity: 0.2,
+                blending: THREE.AdditiveBlending
+            });
+            const glow = new THREE.Mesh(glowGeo, glowMat);
+            pointMesh.add(glow);
+
             trajectoryGroup.add(pointMesh);
             points.push(pointMesh);
 
@@ -484,33 +544,63 @@
                 trajectoryGroup.remove(old);
                 old.geometry.dispose();
                 old.material.dispose();
+                if (old.children.length > 0) {
+                    old.children[0].geometry.dispose();
+                    old.children[0].material.dispose();
+                }
             }
 
-            // Fade points based on age
+            // Fade and color-shift based on age and metrics
             points.forEach((p, idx) => {
                 const ratio = idx / points.length;
-                p.material.opacity = ratio * 0.8;
-                p.scale.set(ratio, ratio, ratio);
-                p.material.color.setHSL(0.12, 0.7, 0.2 + ratio * 0.5);
+                const age = 1.0 - ratio;
+
+                // Entropy -> Hue (blue=low, yellow=mid, red=high)
+                const hue = Math.min(0.15, Math.max(0, (x - 3.0) / 4.0 * 0.15));
+
+                p.material.opacity = ratio * 0.9;
+                p.material.emissiveIntensity = ratio * 1.5;
+                p.scale.set(ratio * 1.2, ratio * 1.2, ratio * 1.2);
+                p.material.color.setHSL(hue, 0.8, 0.5);
+                p.material.emissive.setHSL(hue, 0.8, 0.5);
+
+                if (p.children.length > 0) {
+                    p.children[0].material.opacity = ratio * 0.3;
+                }
             });
         }
 
         function animate3D() {
             requestAnimationFrame(animate3D);
+
             if (merkabah) {
-                const rotSpeed = 0.002 + (currentMetrics.stability || 0) * 0.01;
+                // Adaptive rotation speed based on stability
+                const rotSpeed = 0.001 + (currentMetrics.stability || 0) * 0.015;
                 merkabah.rotation.y += rotSpeed;
-                merkabah.rotation.z += rotSpeed * 0.5;
-                merkabah.children.forEach(t => {
-                    t.material.opacity = 0.05 + (currentMetrics.stability || 0) * 0.2;
+                merkabah.rotation.z += rotSpeed * 0.3;
+
+                // Pulse emissive intensity
+                const pulse = Math.sin(Date.now() * 0.001) * 0.5 + 0.5;
+                merkabah.children.forEach((child, idx) => {
+                    if (idx < 2) {  // Wireframe tetrahedrons
+                        child.material.opacity = 0.4 + (currentMetrics.stability || 0) * 0.3;
+                        child.material.emissiveIntensity = 0.3 + pulse * 0.2;
+                    } else {  // Glass core
+                        child.material.opacity = 0.1 + (currentMetrics.phase_coherence || 0) * 0.2;
+                    }
                 });
             }
-            if (is3DAutoRotate) {
-                const time = Date.now() * 0.0001;
-                camera.position.x = Math.cos(time) * 200;
-                camera.position.z = Math.sin(time) * 200;
+
+            // Auto-rotate camera (if not manually controlled)
+            if (is3DAutoRotate && !controls?.autoRotate) {
+                const time = Date.now() * 0.00008;
+                const radius = 200;
+                camera.position.x = Math.cos(time) * radius;
+                camera.position.z = Math.sin(time) * radius;
+                camera.position.y = 100 + Math.sin(time * 0.5) * 20;
                 camera.lookAt(0, 0, 0);
             }
+
             if (controls) controls.update();
             renderer.render(scene, camera);
         }
@@ -779,6 +869,32 @@
         // --- Controls ---
         document.getElementById('startBtn').onclick = () => ws.send('start');
         document.getElementById('resetBtn').onclick = () => { ws.send('reset'); location.reload(); };
+
+        // Export Trajectory Data as CSV (Researcher Feature)
+        document.getElementById('exportBtn').onclick = () => {
+            if (history.entropy.length === 0) {
+                alert('No data to export. Start the reactor first.');
+                return;
+            }
+
+            let csv = 'timestamp,entropy,mass,phase_coherence,stability,state\n';
+            for (let i = 0; i < history.entropy.length; i++) {
+                const meanMass = history.mass.slice(0, i + 1).reduce((a, b) => a + b, 0) / (i + 1);
+                const entVar = i > 0 ? variance(history.entropy.slice(0, i + 1)) : 0;
+                const phaseStd = i > 0 ? std(history.phase.slice(0, i + 1)) : 0.01;
+                const stability = (meanMass * (1 - Math.min(0.9, entVar))) / (1 + phaseStd);
+
+                csv += `${i * 0.5},${history.entropy[i]},${history.mass[i]},${history.phase[i]},${stability},${lastState}\n`;
+            }
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `cer_trajectory_${Date.now()}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        };
 
         init3D();
         animate3D();
