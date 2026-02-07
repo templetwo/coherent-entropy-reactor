@@ -62,8 +62,8 @@ class KuramotoOscillator(nn.Module):
         Returns:
             Mean phase (for temperature modulation)
         """
-        # Compute phase differences
-        phase_diffs = self.phases.unsqueeze(1) - self.phases.unsqueeze(0)
+        # Compute phase differences: φ_j - φ_i (standard Kuramoto attractive coupling)
+        phase_diffs = self.phases.unsqueeze(0) - self.phases.unsqueeze(1)
 
         # Kuramoto coupling term
         coupling = (self.K / self.n_oscillators) * torch.sin(phase_diffs).sum(dim=1)
